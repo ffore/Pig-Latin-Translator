@@ -1,0 +1,213 @@
+
+THOUGHTS
+--------------------------------------------------------------------------------------
+seems to repeat the last word in sentence.txt when there is a space at the end. 
+
+Things not implemented but considered:
+-all consonant clusters (bl- in bleak)
+-parenthesis
+-symbol preceding a quotation mark
+	* ............. breakfast?"
+--------------------------------------------------------------------------------------
+
+
+
+A.)reads and opens file
+
+B.)check if file is open
+
+C.)loop through file 
+
+D.)grab first str seperated by space 
+
+E.)translates str (taking case into account) using transaltor function
+
+	funct - translator
+	---------------------------------------------------------
+	take in string
+	check case of first letter
+	need to check if " are involved first
+	
+	if there is a quote in the specified string {
+		if quote is at beginning{
+			if upper(char at [1] is upper) {
+				if vowel{
+					add "-ay"
+				}
+				else if consCluster{
+					make first letter (this will be character at [1]) lowercase
+					make 3rd letter (this will be character at [3]) uppercase 
+					take first 2 letters (this will be characters [1] and [2]) and put at end
+					add "-ay"
+				}
+				else{
+					make first letter (this will be character at [1]) lowercase
+					make 2nd letter uppercase (character at [2])
+					take first letter and put at end
+					add "-ay"
+				}
+			}
+			else (!upper){
+				if vowel{
+					add "-ay"
+				}
+				else if consCluster{
+					take first 2 letters and put at end (characters [1] & [2])
+					add "-ay"
+				}
+				else{
+					take first letter and put at end (character [1])
+					add "-ay"
+				}
+			}
+		}
+		if quote is at end{
+			if upper {
+				if vowel{
+					delete "
+					add "-ay"
+					add " at end
+				}
+				else if consCluster{
+					make first 2 letters lower (char at [0] & [1] )
+					make 3rd letter uppercase (char at [2])
+					delete "
+					take first 2 letters and put at end
+					add "-ay"
+					add " at end
+				}
+				else{
+					make first letter lower (char at [0])
+					make 2nd letter upper (char at [1])
+					delete "
+					take first letter and put at end
+					add "-ay"
+					add " at end
+				}
+			}
+			else (!upper){
+				if vowel{
+					delete "
+					add "-ay"
+					add " at end
+				}
+				else if consCluster{
+					delete "
+					take first 2 letters and put at end
+					add "-ay"
+					add " at end
+				}
+				else{
+					delete "
+					take first letter and put at end
+					add "-ay"
+					add " at end
+				}
+				}
+			}
+		}
+		**if quote is at beginning and end{
+			if upper {
+				if vowel{
+					delete " at end
+					add "-ay"
+					add " at end
+				}
+				else if consCluster{
+					make first letter lower (char at [1])
+					make 3rd letter upper (char at [3])
+					delete 2nd "
+					take first 2 letters and put at end (char at [1] & [2])
+					add "-ay"
+					add " at end
+				}
+				else{
+					make first letter lower (char at [1])
+					make second letter upper (char at [2])
+					delete " at end
+					put first letter at end
+					add "-ay"
+					add " at end
+				}
+			}
+			else (!upper){
+				if vowel{
+					delete " at end
+					add "-ay"
+					add " at end
+				}
+				else if consCluster{
+					delete 2nd "
+					take first 2 letters and put at end (char at [1] & [2])
+					add "-ay"
+					add " at end
+				}
+				else{
+					delete " at end
+					put first letter at end
+					add "-ay"
+					add " at end
+				}
+			}
+		}
+	}
+	else{					//if there is no quote
+		if upper {
+			if vowel{
+				add "-ay"
+			}
+			else if consCluster{
+				make word lowercase
+				make 3rd letter uppercase
+				take first 2 letters and put at end
+				add "-ay"
+			}
+			else{
+				make word lowercase
+				make 2nd letter uppercase
+				take first letter and put at end
+				add "-ay"
+			}
+		}
+		else (!upper){
+			if vowel{
+				add "-ay"
+			}
+			else if consCluster{
+				take first 2 letters and put at end
+				add "-ay"
+			}
+			else{
+				take first letter and put at end
+				add "-ay"
+			}
+		}
+	}
+	---------------------------------------------------------
+
+F.)using symMover function move symbol (if necessary)
+
+	---------------------------------------------------------
+	funct - symMover
+	if(string contains symbol . , ! ? ; :){
+		find position of symbol using SOMESTRING.find_first_of("SOMETHINGSOMETHINGELSEANDSOMETHINGELSE") //each something is a diff char
+		save symbol in a temp variable
+		grab first part of string up to (but excluding) symbol - call this substring firstHalf
+		grab second part of string after symbol until end - call this substring secondHalf
+		append secondHalf to firstHalf
+		append the symbol at the end
+	}
+	---------------------------------------------------------
+
+G.)adds this new translated word to a new string
+
+H.)loop through file again
+
+I.)grab next str and translates
+
+J.)adds this new translated word to the existing string with the first translated word
+
+K.)repeat until no more words
+
+
+
