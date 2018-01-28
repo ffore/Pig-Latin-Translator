@@ -1,2 +1,3 @@
 # Pig-Latin-Translator
-Converts a txt file from english to pig latin
+
+Reads a text document of words and outputs the translation in pig latin
